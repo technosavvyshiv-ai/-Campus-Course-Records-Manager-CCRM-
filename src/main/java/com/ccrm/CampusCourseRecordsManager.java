@@ -9,10 +9,6 @@ import com.ccrm.utils.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/**
- * Main application class for Campus Course & Records Manager.
- * Demonstrates menu-driven CLI interface and application orchestration.
- */
 public class CampusCourseRecordsManager {
     private static final Scanner scanner = new Scanner(System.in);
     private static final DataStore dataStore = DataStore.getInstance();
@@ -31,7 +27,7 @@ public class CampusCourseRecordsManager {
             // Load existing data
             loadInitialData();
             
-            // Main menu loop
+    
             boolean running = true;
             while (running) {
                 displayMainMenu();
@@ -776,7 +772,7 @@ public class CampusCourseRecordsManager {
             System.out.println(dept + ": " + count + " courses"));
     }
 
-    // Backup Operations Methods
+
     private static void createBackup() {
         try {
             String backupDir = BackupUtils.createBackup(DATA_DIR, BACKUP_DIR);
