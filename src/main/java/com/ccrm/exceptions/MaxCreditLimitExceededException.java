@@ -1,9 +1,5 @@
 package com.ccrm.exceptions;
 
-/**
- * Custom checked exception for when a student exceeds the maximum credit limit.
- * Demonstrates custom exception handling.
- */
 public class MaxCreditLimitExceededException extends Exception {
     private final int attemptedCredits;
     private final int maxAllowedCredits;
