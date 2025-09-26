@@ -1,9 +1,5 @@
 package com.ccrm.exceptions;
 
-/**
- * Custom checked exception for invalid grade values.
- * Demonstrates custom exception handling.
- */
 public class InvalidGradeException extends Exception {
     private final double invalidGrade;
 
