@@ -1,9 +1,6 @@
 package com.ccrm.exceptions;
 
-/**
- * Custom unchecked exception for when a course is not found.
- * Demonstrates custom exception handling.
- */
+
 public class CourseNotFoundException extends RuntimeException {
     private final String courseId;
 
