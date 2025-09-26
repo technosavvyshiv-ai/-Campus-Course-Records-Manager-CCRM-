@@ -3,10 +3,6 @@ package com.ccrm.model;
 import com.ccrm.enums.Grade;
 import java.time.LocalDate;
 
-/**
- * Enrollment class representing student enrollment in courses with grades.
- * Demonstrates association between Student and Course entities.
- */
 public class Enrollment {
     private String enrollmentId;
     private String studentId;
