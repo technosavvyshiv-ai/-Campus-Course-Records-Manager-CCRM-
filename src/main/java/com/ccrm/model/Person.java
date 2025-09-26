@@ -2,10 +2,6 @@ package com.ccrm.model;
 
 import java.time.LocalDate;
 
-/**
- * Abstract base class representing a person in the campus system.
- * Demonstrates abstraction and inheritance principles.
- */
 public abstract class Person {
     private String id;
     private String fullName;
