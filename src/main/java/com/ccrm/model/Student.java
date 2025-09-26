@@ -4,10 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Student class extending Person, demonstrating inheritance.
- * Manages student-specific data and enrolled courses.
- */
 public class Student extends Person {
     private String registrationNumber;
     private LocalDate enrollmentDate;
