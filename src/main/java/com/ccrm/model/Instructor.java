@@ -4,10 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Instructor class extending Person, demonstrating inheritance.
- * Manages instructor-specific data and assigned courses.
- */
 public class Instructor extends Person {
     private String employeeId;
     private String department;
