@@ -1,9 +1,5 @@
 package com.ccrm.enums;
 
-/**
- * Enum representing academic departments.
- * Demonstrates enum usage for categorization.
- */
 public enum Department {
     COMPUTER_SCIENCE("Computer Science", "CS"),
     MATHEMATICS("Mathematics", "MATH"),
