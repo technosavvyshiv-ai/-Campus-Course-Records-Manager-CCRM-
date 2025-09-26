@@ -4,10 +4,6 @@ import com.ccrm.model.Course;
 import com.ccrm.enums.Department;
 import com.ccrm.enums.Semester;
 
-/**
- * Builder pattern implementation for Course objects.
- * Demonstrates Builder design pattern for complex object construction.
- */
 public class CourseBuilder {
     private String courseId;
     private String courseCode;
