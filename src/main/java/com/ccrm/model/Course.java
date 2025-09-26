@@ -3,10 +3,6 @@ package com.ccrm.model;
 import com.ccrm.enums.Department;
 import com.ccrm.enums.Semester;
 
-/**
- * Course class representing academic courses.
- * Demonstrates encapsulation and association with other entities.
- */
 public class Course {
     private String courseId;
     private String courseCode;
