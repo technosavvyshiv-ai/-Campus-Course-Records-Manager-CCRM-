@@ -1,9 +1,5 @@
 package com.ccrm.exceptions;
 
-/**
- * Custom unchecked exception for when a student is not found.
- * Demonstrates custom exception handling.
- */
 public class StudentNotFoundException extends RuntimeException {
     private final String studentId;
 
