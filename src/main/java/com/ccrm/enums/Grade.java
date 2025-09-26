@@ -1,9 +1,4 @@
 package com.ccrm.enums;
-
-/**
- * Enum representing letter grades with associated grade points.
- * Demonstrates enum usage with constructors, fields, and methods.
- */
 public enum Grade {
     A_PLUS("A+", 4.0),
     A("A", 4.0),
@@ -34,11 +29,7 @@ public enum Grade {
         return gradePoints;
     }
 
-    /**
-     * Converts a numeric score to a letter grade.
-     * @param score The numeric score (0-100)
-     * @return The corresponding Grade enum
-     */
+   
     public static Grade fromScore(double score) {
         if (score >= 97) return A_PLUS;
         if (score >= 93) return A;
