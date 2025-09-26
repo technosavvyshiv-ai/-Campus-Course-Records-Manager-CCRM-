@@ -1,9 +1,5 @@
 package com.ccrm.enums;
 
-/**
- * Enum representing academic semesters.
- * Demonstrates enum usage with constructors and fields.
- */
 public enum Semester {
     SPRING("Spring", 1),
     SUMMER("Summer", 2),
