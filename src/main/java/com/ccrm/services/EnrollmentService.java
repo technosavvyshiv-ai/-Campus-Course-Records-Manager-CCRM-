@@ -10,10 +10,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-/**
- * Service class for enrollment and grading operations.
- * Demonstrates service layer pattern and business logic encapsulation.
- */
+
 public class EnrollmentService {
     private final DataStore dataStore;
 
@@ -21,15 +18,7 @@ public class EnrollmentService {
         this.dataStore = DataStore.getInstance();
     }
 
-    /**
-     * Enrolls a student in a course.
-     * @param studentId The student ID
-     * @param courseId The course ID
-     * @return The created enrollment
-     * @throws StudentNotFoundException if student is not found
-     * @throws CourseNotFoundException if course is not found
-     * @throws MaxCreditLimitExceededException if credit limit would be exceeded
-     */
+  
     public Enrollment enrollStudent(String studentId, String courseId) 
             throws StudentNotFoundException, CourseNotFoundException, MaxCreditLimitExceededException {
         
@@ -75,14 +64,7 @@ public class EnrollmentService {
         return enrollment;
     }
 
-    /**
-     * Unenrolls a student from a course.
-     * @param studentId The student ID
-     * @param courseId The course ID
-     * @throws StudentNotFoundException if student is not found
-     * @throws CourseNotFoundException if course is not found
-     * @throws EnrollmentNotFoundException if enrollment is not found
-     */
+    
     public void unenrollStudent(String studentId, String courseId) 
             throws StudentNotFoundException, CourseNotFoundException, EnrollmentNotFoundException {
         
@@ -110,16 +92,7 @@ public class EnrollmentService {
         student.unenrollFromCourse(courseId);
     }
 
-    /**
-     * Records a grade for an enrollment.
-     * @param studentId The student ID
-     * @param courseId The course ID
-     * @param numericGrade The numeric grade (0-100)
-     * @throws StudentNotFoundException if student is not found
-     * @throws CourseNotFoundException if course is not found
-     * @throws EnrollmentNotFoundException if enrollment is not found
-     * @throws InvalidGradeException if grade is invalid
-     */
+   
     public void recordGrade(String studentId, String courseId, double numericGrade) 
             throws StudentNotFoundException, CourseNotFoundException, 
                    EnrollmentNotFoundException, InvalidGradeException {
@@ -155,12 +128,7 @@ public class EnrollmentService {
         student.setCurrentGPA(newGPA);
     }
 
-    /**
-     * Gets all enrollments for a student.
-     * @param studentId The student ID
-     * @return List of enrollments
-     * @throws StudentNotFoundException if student is not found
-     */
+  
     public List<Enrollment> getStudentEnrollments(String studentId) throws StudentNotFoundException {
         Student student = dataStore.getStudent(studentId);
         if (student == null) {
@@ -170,12 +138,6 @@ public class EnrollmentService {
         return dataStore.getEnrollmentsByStudent(studentId);
     }
 
-    /**
-     * Gets all enrollments for a course.
-     * @param courseId The course ID
-     * @return List of enrollments
-     * @throws CourseNotFoundException if course is not found
-     */
     public List<Enrollment> getCourseEnrollments(String courseId) throws CourseNotFoundException {
         Course course = dataStore.getCourse(courseId);
         if (course == null) {
@@ -185,36 +147,20 @@ public class EnrollmentService {
         return dataStore.getEnrollmentsByCourse(courseId);
     }
 
-    /**
-     * Gets active enrollments for a student.
-     * @param studentId The student ID
-     * @return List of active enrollments
-     * @throws StudentNotFoundException if student is not found
-     */
+   
     public List<Enrollment> getActiveStudentEnrollments(String studentId) throws StudentNotFoundException {
         return getStudentEnrollments(studentId).stream()
                 .filter(Enrollment::isActive)
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Gets completed enrollments for a student.
-     * @param studentId The student ID
-     * @return List of completed enrollments
-     * @throws StudentNotFoundException if student is not found
-     */
     public List<Enrollment> getCompletedStudentEnrollments(String studentId) throws StudentNotFoundException {
         return getStudentEnrollments(studentId).stream()
                 .filter(Enrollment::isCompleted)
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Calculates student's GPA.
-     * @param studentId The student ID
-     * @return The calculated GPA
-     * @throws StudentNotFoundException if student is not found
-     */
+    
     public double calculateStudentGPA(String studentId) throws StudentNotFoundException {
         Student student = dataStore.getStudent(studentId);
         if (student == null) {
@@ -224,12 +170,7 @@ public class EnrollmentService {
         return dataStore.calculateStudentGPA(studentId);
     }
 
-    /**
-     * Gets student's current credit load.
-     * @param studentId The student ID
-     * @return Current credit hours
-     * @throws StudentNotFoundException if student is not found
-     */
+   
     public int getStudentCreditLoad(String studentId) throws StudentNotFoundException {
         Student student = dataStore.getStudent(studentId);
         if (student == null) {
@@ -239,5 +180,5 @@ public class EnrollmentService {
         return dataStore.calculateStudentCredits(studentId);
     }
 
-    // Simplified: removed generic search/criteria helpers
+
 }
