@@ -4,10 +4,6 @@ import java.util.*;
 import java.io.*;
 import java.time.LocalDate;
 
-/**
- * Simple Campus Course & Records Manager
- * Basic implementation meeting core requirements
- */
 public class SimpleCampusManager {
     private static Scanner scanner = new Scanner(System.in);
     private static List<Student> students = new ArrayList<>();
@@ -184,7 +180,7 @@ public class SimpleCampusManager {
         }
     }
     
-    // Helper methods
+  
     private static Student findStudent(String id) {
         for (Student student : students) {
             if (student.getId().equals(id)) {
@@ -241,7 +237,7 @@ public class SimpleCampusManager {
     }
 }
 
-// Simple model classes
+
 class Student {
     private String id;
     private String name;
