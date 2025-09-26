@@ -4,20 +4,17 @@ import com.ccrm.model.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/**
- * Singleton class for centralized data management.
- * Demonstrates Singleton design pattern and thread-safe operations.
- */
+
 public class DataStore {
     private static final DataStore INSTANCE = new DataStore();
 
-    // In-memory collections for data storage
+
     private final Map<String, Student> students;
     private final Map<String, Instructor> instructors;
     private final Map<String, Course> courses;
     private final Map<String, Enrollment> enrollments;
 
-    // Configuration constants
+
     private static final int MAX_CREDITS_PER_SEMESTER = 18;
 
     private DataStore() {
@@ -27,15 +24,12 @@ public class DataStore {
         this.enrollments = new HashMap<>();
     }
 
-    /**
-     * Thread-safe singleton instance creation.
-     * @return The singleton DataStore instance
-     */
+
     public static DataStore getInstance() {
         return INSTANCE;
     }
 
-    // Student management methods
+
     public void addStudent(Student student) {
         students.put(student.getId(), student);
     }
@@ -115,8 +109,6 @@ public class DataStore {
     public void removeCourse(String courseId) {
         courses.remove(courseId);
     }
-
-    // Enrollment management methods
     public void addEnrollment(Enrollment enrollment) {
         enrollments.put(enrollment.getEnrollmentId(), enrollment);
     }
@@ -151,7 +143,6 @@ public class DataStore {
         enrollments.remove(enrollmentId);
     }
 
-    // Business logic methods
     public int calculateStudentCredits(String studentId) {
         return enrollments.values().stream()
                 .filter(enrollment -> enrollment.getStudentId().equals(studentId))
@@ -195,7 +186,6 @@ public class DataStore {
             return false;
         }
 
-        // Check if already enrolled
         boolean alreadyEnrolled = enrollments.values().stream()
                 .anyMatch(enrollment -> enrollment.getStudentId().equals(studentId) 
                                      && enrollment.getCourseId().equals(courseId) 
@@ -205,12 +195,12 @@ public class DataStore {
             return false;
         }
 
-        // Check credit limit
+   
         int currentCredits = calculateStudentCredits(studentId);
         return (currentCredits + course.getCreditHours()) <= MAX_CREDITS_PER_SEMESTER;
     }
 
-    // Utility methods
+
     public void clearAllData() {
         students.clear();
         instructors.clear();
