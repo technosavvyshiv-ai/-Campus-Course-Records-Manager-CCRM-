@@ -90,7 +90,24 @@ public class BackupUtils {
      * @return List of file information
      * @throws IOException if directory access fails
      */
-    // Simplified: removed listFilesRecursivelyWithSize
+    public static List<FileInfo> listFilesRecursivelyWithSize(String dirPath) throws IOException {
+        List<FileInfo> files = new ArrayList<>();
+        Path path = Paths.get(dirPath);
+        
+        if (!Files.exists(path)) {
+            return files;
+        }
+
+        Files.walkFileTree(path, new SimpleFileVisitor<Path>() {
+            @Override
+            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                files.add(new FileInfo(file.toString(), attrs.size(), attrs.creationTime().toInstant()));
+                return FileVisitResult.CONTINUE;
+            }
+        });
+
+        return files;
+    }
 
     /**
      * Recursively counts files and directories in a directory.
@@ -135,7 +152,28 @@ public class BackupUtils {
      * @return List of matching file paths
      * @throws IOException if directory access fails
      */
-    // Simplified: removed findFilesRecursively
+    public static List<String> findFilesRecursively(String dirPath, String pattern) throws IOException {
+        List<String> matchingFiles = new ArrayList<>();
+        Path path = Paths.get(dirPath);
+        
+        if (!Files.exists(path)) {
+            return matchingFiles;
+        }
+
+        PathMatcher matcher = FileSystems.getDefault().getPathMatcher("glob:" + pattern);
+        
+        Files.walkFileTree(path, new SimpleFileVisitor<Path>() {
+            @Override
+            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                if (matcher.matches(file.getFileName())) {
+                    matchingFiles.add(file.toString());
+                }
+                return FileVisitResult.CONTINUE;
+            }
+        });
+
+        return matchingFiles;
+    }
 
     /**
      * Recursively deletes old backup directories based on age.
@@ -144,12 +182,56 @@ public class BackupUtils {
      * @return Number of directories deleted
      * @throws IOException if deletion fails
      */
-    // Simplified: removed cleanupOldBackups
+    public static int cleanupOldBackups(String backupDir, int maxAgeInDays) throws IOException {
+        Path backupPath = Paths.get(backupDir);
+        if (!Files.exists(backupPath)) {
+            return 0;
+        }
+
+        final int[] deletedCount = {0};
+        long maxAgeMillis = maxAgeInDays * 24L * 60L * 60L * 1000L;
+        long cutoffTime = System.currentTimeMillis() - maxAgeMillis;
+
+        Files.walkFileTree(backupPath, new SimpleFileVisitor<Path>() {
+            @Override
+            public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+                if (!dir.equals(backupPath) && dir.getFileName().toString().startsWith("backup_")) {
+                    if (attrs.creationTime().toMillis() < cutoffTime) {
+                        FileUtils.deleteRecursively(dir.toString());
+                        deletedCount[0]++;
+                        return FileVisitResult.SKIP_SUBTREE;
+                    }
+                }
+                return FileVisitResult.CONTINUE;
+            }
+        });
+
+        return deletedCount[0];
+    }
 
     /**
      * Class representing file information.
      */
-    // Simplified: removed FileInfo class
+    public static class FileInfo {
+        private final String path;
+        private final long size;
+        private final java.time.Instant creationTime;
+
+        public FileInfo(String path, long size, java.time.Instant creationTime) {
+            this.path = path;
+            this.size = size;
+            this.creationTime = creationTime;
+        }
+
+        public String getPath() { return path; }
+        public long getSize() { return size; }
+        public java.time.Instant getCreationTime() { return creationTime; }
+
+        @Override
+        public String toString() {
+            return String.format("%s (%s)", path, FileUtils.formatFileSize(size));
+        }
+    }
 
     /**
      * Class representing file count information.

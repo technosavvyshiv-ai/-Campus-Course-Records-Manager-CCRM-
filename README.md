@@ -65,4 +65,4 @@ Enums	enums/Grade.java	Strongly-typed constants
 
 7. Enabling Assertions
 Run with assertions enabled:
-java -ea edu.ccrm.cli.Main
+java -cp "out/production/VITYARTHI(JAVA)" com.ccrm.CampusCourseRecordsManager

@@ -8,7 +8,10 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-
+/**
+ * Builder pattern implementation for Transcript objects.
+ * Demonstrates Builder design pattern for complex report generation.
+ */
 public class TranscriptBuilder {
     private Student student;
     private List<Enrollment> enrollments;

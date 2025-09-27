@@ -1,5 +1,6 @@
 package com.ccrm.exceptions;
 
+
 public class StudentNotFoundException extends RuntimeException {
     private final String studentId;
 

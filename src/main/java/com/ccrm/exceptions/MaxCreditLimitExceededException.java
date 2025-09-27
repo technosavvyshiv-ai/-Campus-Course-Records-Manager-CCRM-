@@ -1,5 +1,6 @@
 package com.ccrm.exceptions;
 
+
 public class MaxCreditLimitExceededException extends Exception {
     private final int attemptedCredits;
     private final int maxAllowedCredits;
